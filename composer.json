@@ -1,0 +1,25 @@
+{
+    "name": "andheiberg/theme",
+    "description": "A modular themeing system based on the blade syntax.",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Andreas Peter Heiberg",
+            "email": "heibergandreas@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.x",
+        "illuminate/view": "4.x"
+    },
+    "autoload": {
+        "psr-0": {
+            "Andheiberg\\Theme": "src/"
+        },
+        "files": [
+            "src/Andheiberg/Theme/helpers.php"
+        ]
+    },
+    "minimum-stability": "dev"
+}
