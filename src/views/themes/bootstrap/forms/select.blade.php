@@ -3,7 +3,7 @@
 <div class="control-group {{ $errors->has($id) ? 'error' : false }}">
 	<label class="control-label" for="{{{ $id }}}">{{{ $text }}} {{ $required ? '<span class="required-red">*</span>' : ''}}</label>
 	<div class="controls">
-		<select id="{{{ $id }}}" name="{{{ $id }}}">
+		<select id="{{{ $id }}}" name="{{{ $id }}}" {{ $disabled ? 'readonly' : '' }}>
 			<option value="">-- choose a {{{ $text }}} --</option>
 			@foreach( $data as $dKey => $d )
 				@if ( is_object($d) )
@@ -16,7 +16,7 @@
 			@endforeach
 		</select>
 		@foreach($errors->get($id) as $message)
-			{{ "<span class='help-inline'>$message</span>" }}
+			{{ "<span class='help-block'>$message</span>" }}
 		@endforeach
 	</div>
 </div>
