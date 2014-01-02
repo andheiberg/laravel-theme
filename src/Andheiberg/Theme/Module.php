@@ -20,6 +20,7 @@ class Module implements ArrayableInterface {
 		'url' => '',
 		'value' => '',
 		'text' => '',
+		'disabled' => false,
 	);
 
 	/**
@@ -107,6 +108,12 @@ class Module implements ArrayableInterface {
 		return $instance;
 	}
 
+	/**
+	 * Render the modules view.
+	 *
+	 * @param  string  $part
+	 * @return string
+	 */
 	public function render($part = null)
 	{
 		$view = 'themes.' . $this->config->get('theme::theme') . '.' . $this->view;
@@ -131,9 +138,43 @@ class Module implements ArrayableInterface {
 		}
 	}
 
+	/**
+	 * Convert a element id to human readable text.
+	 *
+	 * @param  string  $part
+	 * @return string
+	 */
 	public function idToText($id)
 	{
 		return ucfirst(str_replace('_', ' ', $id));
+	}
+
+	/**
+	 * Handle dynamic method calls into the method.
+	 *
+	 * @param  string  $method
+	 * @param  array   $parameters
+	 * @return mixed
+	 */
+	public function __call($method, $parameters)
+	{
+		if (array_key_exists($method, $this->attributes))
+		{
+			if (is_bool($this->attributes[$method]))
+			{
+				$this->attributes[$method] = true;
+			}
+			elseif (is_string($this->attributes[$method]))
+			{
+				$this->attributes[$method] .= ' '.$parameters[0];
+			}
+			elseif (is_array($this->attributes[$method]))
+			{
+				$this->attributes[$method] .= implode(' ', $parameters[0]);
+			}
+		}
+
+		return $this;
 	}
 
 	/**

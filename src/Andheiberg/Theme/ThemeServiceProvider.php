@@ -69,9 +69,9 @@ class ThemeServiceProvider extends ServiceProvider {
 
 		$blade->extend(function($value, $compiler)
 		{
-			$matcher = '/(?(R)\((?:[^\(\)]|(?R))*\)|(?<!\w)(\s*)\+@([^(]*)(\s*(?R)+))/';
+			$matcher = '/\+@([^(]*)(.*\))/';
 			
-			return preg_replace($matcher, '$1<?php echo Theme::$2Start$3; ?>$4', $value);
+			return preg_replace($matcher, '<?php echo Theme::$1Start$2; ?>', $value);
 		});
 
 		$blade->extend(function($value, $compiler)
