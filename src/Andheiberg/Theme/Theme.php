@@ -79,10 +79,13 @@ class Theme {
 		return $view;
 	}
 
-	public function button($text = '', $url = '#', $class = '')
+	public function button($text = '', $url = null, $class = '')
 	{
-		$url = str_contains($url, '/') ? $url : \URL::route($url);
+		return $this->module->create(compact('text', 'url', 'class'));
+	}
 
+	public function deleteButton($text = '', $url = null, $class = '')
+	{
 		return $this->module->create(compact('text', 'url', 'class'));
 	}
 
@@ -121,29 +124,34 @@ class Theme {
 		return $this->module->create(compact('options'));
 	}
 
+	public function formInline($options = array())
+	{
+		return $this->module->create(compact('options'));
+	}
+
 	public function formActions($class = '')
 	{
 		return $this->module->create(compact('class'));
 	}
 
-	public function formText($id = '', $text = null, $required = false, $helpText = null)
+	public function formText($id = '', $text = null, $value = '')
 	{
-		return $this->module->create(compact('id', 'text', 'required', 'helpText'));
+		return $this->module->create(compact('id', 'text', 'value'));
 	}
 
-	public function formTextarea($id = '', $text = null, $required = false, $helpText = null)
+	public function formTextarea($id = '', $text = null, $value = '')
 	{
-		return $this->module->create(compact('id', 'text', 'required', 'helpText'));
+		return $this->module->create(compact('id', 'text', 'value'));
 	}
 
-	public function formPassword($id = '', $text = null, $required = false, $helpText = null)
+	public function formPassword($id = '', $text = null, $value = '')
 	{
-		return $this->module->create(compact('id', 'text', 'required', 'helpText'));
+		return $this->module->create(compact('id', 'text', 'value'));
 	}
 
-	public function formDate($id = '', $text = null, $required = false, $helpText = null)
+	public function formDate($id = '', $text = null, $value = '')
 	{
-		return $this->module->create(compact('id', 'text', 'required', 'helpText'));
+		return $this->module->create(compact('id', 'text', 'value'));
 	}
 
 	public function formHidden($id = '', $value = null)
@@ -151,29 +159,29 @@ class Theme {
 		return $this->module->create(compact('id', 'value'));
 	}
 
-	public function formSelect($id = '', $text = null, $data = [], $required = false, $helpText = null)
-	{		
-		return $this->module->create(compact('id', 'text', 'data', 'required', 'helpText'));
+	public function formSelect($id = '', $text = null, $data = [], $value = '')
+	{
+		return $this->module->create(compact('id', 'text', 'data', 'value'));
 	}
 
-	public function formCheckbox($id = '', $text = null, $data = [], $required = false, $helpText = null)
+	public function formCheckbox($id = '', $text = null, $data = [], $value = '')
 	{
-		return $this->module->create(compact('id', 'text', 'data', 'required', 'helpText'));
+		return $this->module->create(compact('id', 'text', 'data', 'value'));
 	}
 
-	public function formRadio($id = '', $text = null, $data = [], $required = false, $helpText = null)
+	public function formRadio($id = '', $text = null, $data = [], $value = '')
 	{
-		return $this->module->create(compact('view', 'id', 'text', 'data', 'required', 'helpText'));
+		return $this->module->create(compact('id', 'text', 'data', 'value'));
 	}
 
-	public function formRange($text = null, $min = null, $max = null, $required = false, $helpText = null)
+	public function formRange($text = null, $min = null, $max = null, $value = '')
 	{
-		return $this->module->create(compact('id', 'text', 'min', 'max', 'required', 'helpText'));
+		return $this->module->create(compact('id', 'text', 'min', 'max', 'value'));
 	}
 
-	public function formFile($id = '', $text = null, $required = false, $helpText = null)
+	public function formFile($id = '', $text = null, $value = '')
 	{
-		return $this->module->create(compact('id', 'text', 'required', 'helpText'));
+		return $this->module->create(compact('id', 'text', 'value'));
 	}
 
 	public function formSubmit($text = 'Submit', $class = '')
