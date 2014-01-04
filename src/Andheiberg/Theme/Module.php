@@ -4,7 +4,6 @@ use Illuminate\Support\Contracts\ArrayableInterface;
 use Illuminate\Config\Repository as Config;
 use Illuminate\View\Environment as View;
 use Symfony\Component\HttpFoundation\Request;
-use Illuminate\Support\Facades\App;
 
 class Module implements ArrayableInterface {
 
@@ -13,15 +12,7 @@ class Module implements ArrayableInterface {
 	 *
 	 * @var array
 	 */
-	public $attributes = array(
-		'view' => '',
-		'id' => '',
-		'class' => '',
-		'url' => '',
-		'value' => '',
-		'text' => '',
-		'disabled' => false,
-	);
+	public $attributes;
 
 	/**
 	 * The model's attributes.
@@ -75,9 +66,9 @@ class Module implements ArrayableInterface {
 	 */
 	public function __construct(Config $config, Request $request, View $view)
 	{
-		$this->config  = $config;
-		$this->request = $request;
-		$this->renderer    = $view;
+		$this->config   = $config;
+		$this->request  = $request;
+		$this->renderer = $view;
 	}
 
 	/**
@@ -86,26 +77,36 @@ class Module implements ArrayableInterface {
 	 * @param  array  $attributes
 	 * @return \Illuminate\Database\Eloquent\Model
 	 */
-	public static function create(array $attributes)
+	public function create(array $attributes)
 	{
-		$instance = App::make('Andheiberg\Theme\Module');
-
+		$this->attributes = [
+			'view' => '',
+			'id' => '',
+			'class' => '',
+			'url' => '',
+			'value' => '',
+			'text' => '',
+			'helpText' => '',
+			'disabled' => false,
+			'required' => false,
+		];
+		
 		foreach ($attributes as $key => $value)
 		{
-			$instance->attributes[$key] = $value;
+			$this->attributes[$key] = $value;
 		}
 
-		if ($instance->id && $instance->value == null)
+		if ($this->id && $this->value == null)
 		{
-			$instance->value = $instance->request->old($instance->id) ?: $instance->request->input($instance->id);
+			$this->value = $this->request->old($this->id) ?: $this->request->input($this->id);
 		}
 
-		if ($instance->id && ! $instance->text)
+		if ($this->id && ! $this->text)
 		{
-			$instance->text = $instance->idToText($instance->id);
+			$this->text = $this->idToText($this->id);
 		}
 
-		return $instance;
+		return $this;
 	}
 
 	/**
@@ -117,9 +118,16 @@ class Module implements ArrayableInterface {
 	public function render($part = null)
 	{
 		$view = 'themes.' . $this->config->get('theme::theme') . '.' . $this->view;
-
-		if ( ! file_exists( app_path() . '/views/' . str_replace('.', '/', $view) . '.blade.php' ) )
+		if ( ! file_exists(app_path().'/views/'.str_replace('.', '/', $view).'.blade.php'))
 		{
+			if ( ! file_exists(__DIR__.'/../../views/'.str_replace('.', '/', $view) . '.blade.php'))
+			{
+				return "Theme view does not exist. (view: {$view})";
+
+				// not allowed http://stackoverflow.com/questions/2429642/why-its-impossible-to-throw-exception-from-tostring
+				// throw new \Exception('Theme view does not exist.');
+			}
+
 			$view = 'theme::' . $view;
 		}
 
@@ -160,35 +168,21 @@ class Module implements ArrayableInterface {
 	{
 		if (array_key_exists($method, $this->attributes))
 		{
-			if (is_bool($this->attributes[$method]))
+			if (is_bool($this->attributes[$method]) and empty($parameters))
 			{
 				$this->attributes[$method] = true;
 			}
-			elseif (is_string($this->attributes[$method]))
+			elseif (is_string($parameters[0]))
 			{
 				$this->attributes[$method] .= ' '.$parameters[0];
 			}
-			elseif (is_array($this->attributes[$method]))
+			elseif (is_array($parameters[0]))
 			{
 				$this->attributes[$method] .= implode(' ', $parameters[0]);
 			}
 		}
 
 		return $this;
-	}
-
-	/**
-	 * Handle dynamic static method calls into the method.
-	 *
-	 * @param  string  $method
-	 * @param  array   $parameters
-	 * @return mixed
-	 */
-	public static function __callStatic($method, $parameters)
-	{
-		$instance = App::make('Andheiberg\Theme\Module');
-
-		return call_user_func_array(array($instance, $method), $parameters);
 	}
 
 	/**

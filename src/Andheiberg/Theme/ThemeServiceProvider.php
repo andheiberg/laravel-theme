@@ -28,14 +28,14 @@ class ThemeServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app->bind('Andheiberg\Theme\Module', function($app) {
+		$this->app->bind('theme.module', function($app) {
 			return new Module($app['config'], $app['request'], $app['view']);
 		});
 		
 		// Register 'theme' instance container to our Asset object
 		$this->app['theme'] = $this->app->share(function($app)
 		{
-			return new Theme($app->make('Andheiberg\Theme\Module'));
+			return new Theme($app['theme.module']);
 		});
 
 		// Shortcut so developers don't need to add an Alias in app/config/app.php
