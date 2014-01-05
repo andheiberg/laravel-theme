@@ -154,6 +154,11 @@ class Theme {
 		return $this->module->create(compact('id', 'text', 'value'));
 	}
 
+	public function formEmail($id = '', $text = null, $value = '')
+	{
+		return $this->module->create(compact('id', 'text', 'value'));
+	}
+
 	public function formHidden($id = '', $value = null)
 	{
 		return $this->module->create(compact('id', 'value'));
