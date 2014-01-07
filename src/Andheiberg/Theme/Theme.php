@@ -107,7 +107,7 @@ class Theme {
 		$pattern = $pattern ?: substr($url, 1) . '*';
 		$class = Request::is($pattern) ? 'active' : '';
 
-		$this->module->create(compact('text', 'url', 'pattern', 'class'));
+		return $this->module->create(compact('text', 'url', 'pattern', 'class'));
 	}
 
 
