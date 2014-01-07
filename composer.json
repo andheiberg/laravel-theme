@@ -1,7 +1,6 @@
 {
     "name": "andheiberg/theme",
     "description": "A modular themeing system based on the blade syntax.",
-    "version": "1.0.0",
     "authors": [
         {
             "name": "Andreas Peter Heiberg",
