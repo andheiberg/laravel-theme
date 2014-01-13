@@ -35,3 +35,17 @@ if ( ! function_exists('str_before'))
 		return $string == '' ? false : $string;
 	}
 }
+
+if ( ! function_exists('is_associative'))
+{
+	/**
+	 * Checks if an array is associative
+	 *
+	 * @param  array  $array
+	 * @return bool
+	 */
+	function is_associative($array)
+	{
+		return array_keys($array) !== range(0, count($array) - 1);
+	}
+}
