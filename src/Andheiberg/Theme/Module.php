@@ -86,6 +86,7 @@ class Module implements ArrayableInterface {
 			'url' => '',
 			'value' => '',
 			'text' => '',
+			'placeholder' => '',
 			'helpText' => '',
 			'disabled' => false,
 			'required' => false,
