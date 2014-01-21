@@ -1,8 +1,8 @@
 <?php $associative = is_associative($data); ?>
 
-<div class="control-group {{ $errors->has($id) ? 'error' : false }}">
+<div class="form-group {{ $errors->has($id) ? 'has-error' : false }}">
 	<label class="control-label">{{{ $text }}} {{ $required ? '<span class="required-red">*</span>' : ''}}</label>
-	<div class="controls">
+	<div class="form-controls">
 		@foreach( $data as $dKey => $d )
 			@if ( is_object($d) )
 				<label class="checkbox inline">
