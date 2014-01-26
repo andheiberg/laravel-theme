@@ -139,6 +139,11 @@ class Theme {
 		return $this->module->create(compact('id', 'text', 'value'));
 	}
 
+	public function formUrl($id = '', $text = null, $value = '')
+	{
+		return $this->module->create(compact('id', 'text', 'value'));
+	}
+
 	public function formTextarea($id = '', $text = null, $value = '')
 	{
 		return $this->module->create(compact('id', 'text', 'value'));
