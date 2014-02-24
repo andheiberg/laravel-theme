@@ -42,7 +42,7 @@ class Theme {
 		}
 		elseif ( ! count($parameters) )
 		{
-			$module = $this->module;
+			$module = $this->module->create([]);
 		}
 		else
 		{
@@ -175,6 +175,11 @@ class Theme {
 	}
 
 	public function formSelect($id = '', $text = null, $data = [], $value = '')
+	{
+		return $this->module->create(compact('id', 'text', 'data', 'value'));
+	}
+
+	public function formMultiSelect($id = '', $text = null, $data = [], $value = '')
 	{
 		return $this->module->create(compact('id', 'text', 'data', 'value'));
 	}

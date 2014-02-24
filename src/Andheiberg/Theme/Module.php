@@ -77,7 +77,7 @@ class Module implements ArrayableInterface {
 	 * @param  array  $attributes
 	 * @return \Illuminate\Database\Eloquent\Model
 	 */
-	public function create(array $attributes)
+	public function create(array $attributes = array())
 	{
 		$this->attributes = [
 			'view' => '',
@@ -91,7 +91,7 @@ class Module implements ArrayableInterface {
 			'disabled' => false,
 			'required' => false,
 		];
-		
+
 		foreach ($attributes as $key => $value)
 		{
 			$this->attributes[$key] = $value;

@@ -35,3 +35,36 @@ if ( ! function_exists('str_before'))
 		return $string == '' ? false : $string;
 	}
 }
+
+if ( ! function_exists('is_associative'))
+{
+	/**
+	 * Checks if an array is associative
+	 *
+	 * @param  array  $array
+	 * @return bool
+	 */
+	function is_associative($array)
+	{
+		return array_keys($array) !== range(0, count($array) - 1);
+	}
+}
+
+if ( ! function_exists('theme_compare_values'))
+{
+	/**
+	 * Checks if an array is associative
+	 *
+	 * @param  array  $array
+	 * @return bool
+	 */
+	function theme_compare_values($one, $two)
+	{
+		if (is_numeric($one))
+		{
+			return (int) $one == (int) $two;
+		}
+
+		return $one == $two;
+	}
+}

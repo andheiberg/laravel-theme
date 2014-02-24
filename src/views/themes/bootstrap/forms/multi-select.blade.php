@@ -1,11 +1,9 @@
-<?php
-	$associative = is_array($data) ? is_associative($data) : false;
-?>
+<?php $associative = is_array($data) ? is_associative($data) : false; ?>
 
 <div class="form-group {{ $errors->has($id) ? 'has-error' : false }}">
-	<label class="control-label" for="{{{ $id }}}">{{{ $text }}} {{ $required ? '<span class="required-red">*</span>' : ''}}</label>
+	<label class="control-label" for="{{{ $id }}}[]">{{{ $text }}} {{ $required ? '<span class="required-red">*</span>' : ''}}</label>
 	<div class="form-controls">
-		<select id="{{{ $id }}}" name="{{{ $id }}}" {{ $disabled ? 'readonly' : '' }}>
+		<select multiple id="{{{ $id }}}[]" name="{{{ $id }}}[]" {{ $disabled ? 'readonly' : '' }}>
 			<option value="">-- {{{ $text }}} --</option>
 			@foreach( $data as $dKey => $d )
 				@if ( is_object($d) )
@@ -15,7 +13,6 @@
 				@else
 					<option value="{{{ $d }}}" {{{ theme_compare_values($d, $value) ? 'selected' : '' }}}>{{{ $d }}}</option>
 				@endif
-				<?php var_dump([$dKey, $value]); ?>
 			@endforeach
 		</select>
 		@foreach($errors->get($id) as $message)
