@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Contracts\ArrayableInterface;
 use Illuminate\Config\Repository as Config;
-use Illuminate\View\Environment as View;
+use Illuminate\View\Factory as View;
 use Symfony\Component\HttpFoundation\Request;
 
 class Module implements ArrayableInterface {
@@ -52,7 +52,7 @@ class Module implements ArrayableInterface {
 	/**
 	 * The view implementation.
 	 *
-	 * @var Illuminate\View\Environment $view
+	 * @var Illuminate\View\Factory $view
 	 */
 	protected $renderer;
 
@@ -61,7 +61,7 @@ class Module implements ArrayableInterface {
 	 *
 	 * @param  Illuminate\Config\Repository  $config
 	 * @param  Symfony\Component\HttpFoundation\Request  $request
-	 * @param  Illuminate\View\Environment  $view
+	 * @param  Illuminate\View\Factory  $view
 	 * @return void
 	 */
 	public function __construct(Config $config, Request $request, View $view)

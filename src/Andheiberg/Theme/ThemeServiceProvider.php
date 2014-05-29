@@ -67,18 +67,18 @@ class ThemeServiceProvider extends ServiceProvider {
 	{
 		$blade = $this->app['view']->getEngineResolver()->resolve('blade')->getCompiler();
 
-		$blade->extend(function($value, $compiler)
+		$blade->extend(function($view, $compiler)
 		{
 			$matcher = '/(?(R)\((?:[^\(\)]|(?R))*\)|(?<!\w)(\s*)\+@([^(]*)(\s*(?R)+(?:-.*\))?))/';
 			
-			return preg_replace($matcher, '<?php echo $1Theme::$2Start$3; ?>', $value);
+			return preg_replace($matcher, '<?php echo $1Theme::$2Start$3; ?>', $view);
 		});
 
-		$blade->extend(function($value, $compiler)
+		$blade->extend(function($view, $compiler)
 		{
 			$matcher = '/\-@(.*)/';
 			
-			return preg_replace($matcher, '<?php echo Theme::$1End(); ?>', $value);
+			return preg_replace($matcher, '<?php echo Theme::$1End(); ?>', $view);
 		});
 	}
 
