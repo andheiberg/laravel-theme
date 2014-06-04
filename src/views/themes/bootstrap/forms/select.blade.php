@@ -5,7 +5,7 @@
 <div class="form-group {{ $errors->has($id) ? 'has-error' : false }}">
 	<label class="control-label" for="{{{ $id }}}">{{{ $text }}} {{ $required ? '<span class="required-red">*</span>' : ''}}</label>
 	<div class="form-controls">
-		<select id="{{{ $id }}}" name="{{{ $id }}}" {{ $disabled ? 'readonly' : '' }}>
+		<select class="form-control" id="{{{ $id }}}" name="{{{ $id }}}" {{ $disabled ? 'readonly' : '' }}>
 			<option value="">-- {{{ $text }}} --</option>
 			@foreach( $data as $dKey => $d )
 				@if ( is_object($d) )
