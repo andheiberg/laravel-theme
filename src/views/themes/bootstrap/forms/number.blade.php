@@ -1,7 +1,7 @@
 <div class="form-group {{ $errors->has($id) ? 'has-error' : false }}">
 	<label for="{{ $id }}" class="control-label">{{ $text }} {{ $required ? '<span class="required-red">*</span>' : ''}}</label>
 	<div class="form-controls">
-		<input type="number" id="{{ $id }}" name="{{ $id }}" value="{{ $value }}" class="form-control" placeholder="{{ $placeholder }}" {{ $disabled ? 'readonly' : '' }}>
+		<input type="number" id="{{ $id }}" name="{{ $id }}" value="{{ $value }}" class="form-control" placeholder="{{ $placeholder }}" {{ $disabled ? 'readonly' : '' }} step="any">
 		@if ($helpText)
 			<span class='help-block'>{{ $helpText }}</span>
 		@endif
