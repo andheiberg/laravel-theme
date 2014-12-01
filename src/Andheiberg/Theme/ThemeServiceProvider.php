@@ -76,7 +76,7 @@ class ThemeServiceProvider extends ServiceProvider {
 
 		$blade->extend(function($view, $compiler)
 		{
-			$matcher = '/\-@(.*)/';
+			$matcher = '/\-@(.*)(?=\r\n)/';
 			
 			return preg_replace($matcher, '<?php echo Theme::$1End(); ?>', $view);
 		});
