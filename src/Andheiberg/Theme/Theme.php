@@ -38,7 +38,13 @@ class Theme {
 
 		if ( method_exists(get_class(), $function) )
 		{
-			$module = call_user_func_array(get_class() . '::' . $function, $parameters);
+			// Get the formatted arguments from the view function
+			$arguments = call_user_func_array(get_class() . '::' . $function, $parameters);
+			// Get the optional options array
+			$options = isset($parameters[count($arguments)]) ? $parameters[count($arguments)] : array();
+			// Merge the expected arguments with the options
+			$arguments = array_merge($options, $arguments);
+			$module = $this->module->create($arguments);
 		}
 		elseif ( ! count($parameters) )
 		{
@@ -81,24 +87,24 @@ class Theme {
 
 	public function button($text = '', $url = null, $class = '')
 	{
-		return $this->module->create(compact('text', 'url', 'class'));
+		return compact('text', 'url', 'class');
 	}
 
 	public function deleteButton($text = '', $url = null, $class = '')
 	{
-		return $this->module->create(compact('text', 'url', 'class'));
+		return compact('text', 'url', 'class');
 	}
 
 	public function dropdown($text = '')
 	{
-		return $this->module->create(compact('text'));
+		return compact('text');
 	}
 
 	public function dropdownItem($text = '', $url = '#')
 	{
 		$url = str_contains($url, '/') ? $url : \URL::route($url);
 		
-		return $this->module->create(compact('text', 'url'));
+		return compact('text', 'url');
 	}
 
 	public function navItem($text = '', $url = '#', $pattern = null)
@@ -107,7 +113,7 @@ class Theme {
 		$pattern = $pattern ?: substr($url, 1) . '*';
 		$class = Request::is($pattern) ? 'active' : '';
 
-		return $this->module->create(compact('text', 'url', 'pattern', 'class'));
+		return compact('text', 'url', 'pattern', 'class');
 	}
 
 
@@ -116,97 +122,97 @@ class Theme {
 
 	public function form($options = array())
 	{
-		return $this->module->create(compact('options'));
+		return compact('options');
 	}
 
 	public function formHorizontal($options = array())
 	{
-		return $this->module->create(compact('options'));
+		return compact('options');
 	}
 
 	public function formInline($options = array())
 	{
-		return $this->module->create(compact('options'));
+		return compact('options');
 	}
 
 	public function formActions($class = '')
 	{
-		return $this->module->create(compact('class'));
+		return compact('class');
 	}
 
 	public function formText($id = '', $text = null, $value = '')
 	{
-		return $this->module->create(compact('id', 'text', 'value'));
+		return compact('id', 'text', 'value');
 	}
 
 	public function formUrl($id = '', $text = null, $value = '')
 	{
-		return $this->module->create(compact('id', 'text', 'value'));
+		return compact('id', 'text', 'value');
 	}
 
 	public function formTextarea($id = '', $text = null, $value = '')
 	{
-		return $this->module->create(compact('id', 'text', 'value'));
+		return compact('id', 'text', 'value');
 	}
 
 	public function formPassword($id = '', $text = null, $value = '')
 	{
-		return $this->module->create(compact('id', 'text', 'value'));
+		return compact('id', 'text', 'value');
 	}
 
 	public function formDate($id = '', $text = null, $value = '')
 	{
-		return $this->module->create(compact('id', 'text', 'value'));
+		return compact('id', 'text', 'value');
 	}
 
 	public function formEmail($id = '', $text = null, $value = '')
 	{
-		return $this->module->create(compact('id', 'text', 'value'));
+		return compact('id', 'text', 'value');
 	}
 
 	public function formNumber($id = '', $text = null, $value = '')
 	{
-		return $this->module->create(compact('id', 'text', 'value'));
+		return compact('id', 'text', 'value');
 	}
 
 	public function formHidden($id = '', $value = null)
 	{
-		return $this->module->create(compact('id', 'value'));
+		return compact('id', 'value');
 	}
 
 	public function formSelect($id = '', $text = null, $data = [], $value = '')
 	{
-		return $this->module->create(compact('id', 'text', 'data', 'value'));
+		return compact('id', 'text', 'data', 'value');
 	}
 
 	public function formMultiSelect($id = '', $text = null, $data = [], $value = '')
 	{
-		return $this->module->create(compact('id', 'text', 'data', 'value'));
+		return compact('id', 'text', 'data', 'value');
 	}
 
 	public function formCheckbox($id = '', $text = null, $data = [], $value = '')
 	{
-		return $this->module->create(compact('id', 'text', 'data', 'value'));
+		return compact('id', 'text', 'data', 'value');
 	}
 
 	public function formRadio($id = '', $text = null, $data = [], $value = '')
 	{
-		return $this->module->create(compact('id', 'text', 'data', 'value'));
+		return compact('id', 'text', 'data', 'value');
 	}
 
 	public function formRange($text = null, $min = null, $max = null, $value = '')
 	{
-		return $this->module->create(compact('id', 'text', 'min', 'max', 'value'));
+		return compact('id', 'text', 'min', 'max', 'value');
 	}
 
 	public function formFile($id = '', $text = null, $value = '')
 	{
-		return $this->module->create(compact('id', 'text', 'value'));
+		return compact('id', 'text', 'value');
 	}
 
 	public function formSubmit($text = 'Submit', $class = '')
 	{
-		return $this->module->create(compact('text', 'class'));
+		return compact('text', 'class');
 	}
 
 }
