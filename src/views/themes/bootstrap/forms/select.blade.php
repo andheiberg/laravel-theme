@@ -15,7 +15,6 @@
 				@else
 					<option value="{{{ $d }}}" {{{ theme_compare_values($d, $value) ? 'selected' : '' }}}>{{{ $d }}}</option>
 				@endif
-				<?php var_dump([$dKey, $value]); ?>
 			@endforeach
 		</select>
 		@foreach($errors->get($id) as $message)
