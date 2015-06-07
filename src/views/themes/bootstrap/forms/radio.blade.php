@@ -1,4 +1,4 @@
-<div class="form-group {{ $errors->has($id) ? 'has-error' : false }}">
+<div class="form-group {{ $class }} {{ $errors->has($id) ? 'has-error' : false }}">
 	<label class="control-label">{{{ $text }}} {{ $required ? '<span class="required-red">*</span>' : ''}}</label>
 	<div class="form-controls">
 		@foreach( $data as $dKey => $d )

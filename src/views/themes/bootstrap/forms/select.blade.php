@@ -2,10 +2,10 @@
 	$associative = is_array($data) ? is_associative($data) : false;
 ?>
 
-<div class="form-group {{ $errors->has($id) ? 'has-error' : false }}">
+<div class="form-group {{ $class }} {{ $errors->has($id) ? 'has-error' : false }}">
 	<label class="control-label" for="{{{ $id }}}">{{{ $text }}} {{ $required ? '<span class="required-red">*</span>' : ''}}</label>
 	<div class="form-controls">
-		<select class="form-control" id="{{{ $id }}}" name="{{{ $id }}}" {{ $disabled ? 'readonly' : '' }}>
+		<select class="form-control" id="{{{ $id }}}" name="{{{ $id }}}" {{ $disabled ? 'readonly' : '' }} {{ $required ? 'required' : '' }}>
 			<option value="">-- {{{ $text }}} --</option>
 			@foreach( $data as $dKey => $d )
 				@if ( is_object($d) )

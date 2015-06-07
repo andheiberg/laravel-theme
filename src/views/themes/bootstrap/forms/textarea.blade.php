@@ -1,4 +1,4 @@
-<div class="form-group {{{ $class }}} {{ $errors->has($id) ? 'has-error' : false }}">
+<div class="form-group {{ $class }} {{ $errors->has($id) ? 'has-error' : false }}">
 	<label for="{{ $id }}" class="control-label">{{ $text }} {{ $required ? '<span class="required-red">*</span>' : ''}}</label>
 	<div class="form-controls">
 		<textarea class="form-control" name="{{ $id }}" id="{{ $id }}" cols="30" rows="10" placeholder="{{ $placeholder }}" {{ $disabled ? 'readonly' : '' }}>{{ $value }}</textarea>

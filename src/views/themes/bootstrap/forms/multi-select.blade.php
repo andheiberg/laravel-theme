@@ -1,6 +1,6 @@
 <?php $associative = is_array($data) ? is_associative($data) : false; ?>
 
-<div class="form-group {{ $errors->has($id) ? 'has-error' : false }}">
+<div class="form-group {{ $class }} {{ $errors->has($id) ? 'has-error' : false }}">
 	<label class="control-label" for="{{{ $id }}}[]">{{{ $text }}} {{ $required ? '<span class="required-red">*</span>' : ''}}</label>
 	<div class="form-controls">
 		<select class="form-control" multiple id="{{{ $id }}}[]" name="{{{ $id }}}[]" {{ $disabled ? 'readonly' : '' }}>
