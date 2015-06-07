@@ -1,3 +1,3 @@
-+@formInline(['url' => $url, 'method' => 'DELETE'])
+{{ Form::open(['url' => $url, 'method' => 'DELETE', 'class' => 'form-inline']) }}
 	<input type="submit" class="btn btn-danger {{ $class }}" value="{{ $text }}">
--@form
+{{ Form::close() }}
