@@ -90,6 +90,8 @@ class Module implements ArrayableInterface {
 			'helpText' => '',
 			'disabled' => false,
 			'required' => false,
+			'cols' => 30,
+			'rows' => 10
 		];
 
 		foreach ($attributes as $key => $value)
@@ -176,6 +178,10 @@ class Module implements ArrayableInterface {
 			elseif (is_string($parameters[0]))
 			{
 				$this->attributes[$method] .= ' '.$parameters[0];
+			}
+			elseif (is_numeric($parameters[0]))
+			{
+				$this->attributes[$method] = $parameters[0];
 			}
 			elseif (is_array($parameters[0]))
 			{
