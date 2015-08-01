@@ -1,11 +1,26 @@
 Theme
 ===
 
-###A simple modular approach to themeing created to blend in with Laravel's standard syntax a.k.a. Blade.
+###A simple modular approach to theming created to blend in with Blade.
+The concept is to split your theme up into modules that can be reused and changed easily. These modules are stored as simple view files in resources/views/vendor/theme. An example of a typical module could be a hero unit. You would store your hero model like so:
 
-The concept is to split your theme up into modules that can be reused and changed easily. These modules are stored as simple view files in app/views/theme. An example of a typical module could be a hero unit. You would store your hero model like so:
+	+@form(['route' => 'auth.register'])
+		+@formText('username', 'What do you want to be called?')->placeholder('darthvader')
+		
+		+@formPassword('password') // if you don't provide a label it will capitalize the key
+		
+		+@formHidden('awesomeness', 11)
 
-	// app/views/theme/hero.blade.php
+		+@formSelect('gender', 'Your gender', ['Male', 'Female'])->required()
+
+		+@formDate('born_at', 'Birthdate')
+	-@form
+
+It's especially powerful for forms. By default it will fill old values and show validation messages. It reduces view code by +10x for typical forms.
+
+It can be used for anything though. Modules are easy to define.
+
+	// resources/views/vendor/theme/hero.blade.php
 	<div class="hero row {{ $class }}">
 		<div class="column">
 
@@ -54,12 +69,12 @@ Installation
 ---
 Add the following to your composer.json:
 
-	"andheiberg/theme": "2.0.*@dev" // "1.0.*@dev" for Laravel 4.1 support
+	"andheiberg/theme": "3.0.*" // "1.0.*" for Laravel 4.1 support, "2.0.*" for Laravel 4.2 support
 
-Add Theme's service provider to your Laravel application in app/config/app.php. Add the following to the providers:
+Add Theme's service provider to your Laravel application in config/app.php. Add the following to the providers:
 
-	'Andheiberg\Theme\ThemeServiceProvider',
+	Andheiberg\Theme\ThemeServiceProvider:class,
 
 If you would like to use another theme than default you would have to publish the settings and change the theme setting:
 
-	php artisan config:publish andheiberg/theme
+	php artisan vendor:publish --provider="Andheiberg\Theme\ThemeServiceProvider"
