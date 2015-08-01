@@ -1,3 +1,3 @@
-{{ Form::open($options) }}
+{!! Form::open($options) !!}
 <!-- Content -->
-{{ Form::close() }}
+{!! Form::close() !!}

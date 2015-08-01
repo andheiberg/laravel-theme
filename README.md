@@ -74,6 +74,11 @@ Add the following to your composer.json:
 Add Theme's service provider to your Laravel application in config/app.php. Add the following to the providers:
 
 	Andheiberg\Theme\ThemeServiceProvider:class,
+	Illuminate\Html\HtmlServiceProvider::class,
+
+And to the aliases:
+
+	'Form'      => Illuminate\Html\FormFacade::class,
 
 If you would like to use another theme than default you would have to publish the settings and change the theme setting:
 
