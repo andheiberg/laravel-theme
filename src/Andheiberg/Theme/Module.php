@@ -1,11 +1,11 @@
 <?php namespace Andheiberg\Theme;
 
-use Illuminate\Support\Contracts\ArrayableInterface;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Config\Repository as Config;
 use Illuminate\View\Factory as View;
 use Symfony\Component\HttpFoundation\Request;
 
-class Module implements ArrayableInterface {
+class Module implements Arrayable {
 
 	/**
 	 * The modules's attributes.
@@ -120,19 +120,7 @@ class Module implements ArrayableInterface {
 	 */
 	public function render($part = null)
 	{
-		$view = 'themes.' . $this->config->get('theme::theme') . '.' . $this->view;
-		if ( ! file_exists(app_path().'/views/'.str_replace('.', '/', $view).'.blade.php'))
-		{
-			if ( ! file_exists(__DIR__.'/../../views/'.str_replace('.', '/', $view) . '.blade.php'))
-			{
-				return "Theme view does not exist. (view: {$view})";
-
-				// not allowed http://stackoverflow.com/questions/2429642/why-its-impossible-to-throw-exception-from-tostring
-				// throw new \Exception('Theme view does not exist.');
-			}
-
-			$view = 'theme::' . $view;
-		}
+		$view = 'theme::' . $this->config->get('theme.theme') . '.' . $this->view;
 
 		$render = $this->renderer->make($view, $this->attributes)->render();
 
@@ -255,7 +243,14 @@ class Module implements ArrayableInterface {
 	 */
 	public function __toString()
 	{
-		return $this->render($this->part);
+		try
+		{
+			return $this->render($this->part);
+		}
+		catch (\Exception $e)
+		{
+			return (string) $e;
+		}
 	}
 
 }

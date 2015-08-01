@@ -18,7 +18,16 @@ class ThemeServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('andheiberg/theme');
+		$this->loadViewsFrom(__DIR__.'/../../views', 'theme'); // theme::bootstrap.nav
+
+		$this->publishes([
+			__DIR__.'/../../views' => base_path('resources/views/vendor/theme'),
+			__DIR__.'/../../config/theme.php' => config_path('theme.php'),
+		]);
+
+		$this->mergeConfigFrom(
+			__DIR__.'/../../config/theme.php', 'theme'
+		);
 	}
 
 	/**
