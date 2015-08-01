@@ -210,6 +210,11 @@ class Theme {
 		return compact('id', 'text', 'value');
 	}
 
+	public function formBoolean($id = '', $text = null)
+	{
+		return compact('id', 'text');
+	}
+
 	public function formSubmit($text = 'Submit', $class = '')
 	{
 		return compact('text', 'class');
