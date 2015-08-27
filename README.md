@@ -69,7 +69,7 @@ Installation
 ---
 Add the following to your composer.json:
 
-	"andheiberg/theme": "3.0.*" // "1.0.*" for Laravel 4.1 support, "2.0.*" for Laravel 4.2 support
+	"andheiberg/theme": "3.1.*" // "1.0.*" for Laravel 4.1 support, "2.0.*" for Laravel 4.2 support
 
 Add Theme's service provider to your Laravel application in config/app.php. Add the following to the providers:
 
