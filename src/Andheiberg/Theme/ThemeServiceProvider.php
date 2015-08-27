@@ -38,7 +38,7 @@ class ThemeServiceProvider extends ServiceProvider {
 	public function register()
 	{
 		$this->app->bind('theme.module', function($app) {
-			return new Module($app['config'], $app['request'], $app['view']);
+			return new Module($app['config'], $app['request'], $app['view'], $app['translator']);
 		});
 		
 		// Register 'theme' instance container to our Asset object

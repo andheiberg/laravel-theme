@@ -3,6 +3,7 @@
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Config\Repository as Config;
 use Illuminate\View\Factory as View;
+use Illuminate\Translation\Translator as Lang;
 use Symfony\Component\HttpFoundation\Request;
 
 class Module implements Arrayable {
@@ -57,18 +58,27 @@ class Module implements Arrayable {
 	protected $renderer;
 
 	/**
+	 * Illuminate's Translator Repository.
+	 *
+	 * @var \Illuminate\Translation\Translator
+	 */
+	protected $lang;
+
+	/**
 	 * Create a new module instance.
 	 *
 	 * @param  Illuminate\Config\Repository  $config
 	 * @param  Symfony\Component\HttpFoundation\Request  $request
 	 * @param  Illuminate\View\Factory  $view
+	 * @param  \Illuminate\Translation\Translator $lang
 	 * @return void
 	 */
-	public function __construct(Config $config, Request $request, View $view)
+	public function __construct(Config $config, Request $request, View $view, Lang $lang)
 	{
 		$this->config   = $config;
 		$this->request  = $request;
 		$this->renderer = $view;
+		$this->lang     = $lang;
 	}
 
 	/**
@@ -99,14 +109,22 @@ class Module implements Arrayable {
 			$this->attributes[$key] = $value;
 		}
 
-		if ($this->id && $this->value == null)
+		// Get old value if none is set
+		if ($this->value == null and $this->id)
 		{
 			$this->value = $this->request->old($this->id) ?: $this->request->input($this->id);
 		}
 
-		if ($this->id && ! $this->text)
+		// Create text if none is set
+		if (! $this->text and $this->id)
 		{
 			$this->text = $this->idToText($this->id);
+		}
+
+		// Get the translation if one exists
+		if ($this->lang->has($this->text))
+		{
+			$this->text = $this->lang->get($this->text);
 		}
 
 		return $this;
