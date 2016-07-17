@@ -69,16 +69,16 @@ Installation
 ---
 Add the following to your composer.json:
 
-	"andheiberg/theme": "3.1.*" // "1.0.*" for Laravel 4.1 support, "2.0.*" for Laravel 4.2 support
+	"andheiberg/theme": "4.0.*" // "1.0.*" for Laravel 4.1 support, "2.0.*" for Laravel 4.2 support, "3.1.*" for Laravel 5 and 5.1 support
 
 Add Theme's service provider to your Laravel application in config/app.php. Add the following to the providers:
 
 	Andheiberg\Theme\ThemeServiceProvider::class,
-	Illuminate\Html\HtmlServiceProvider::class,
+	Collective\Html\HtmlServiceProvider::class,
 
 And to the aliases:
 
-	'Form'      => Illuminate\Html\FormFacade::class,
+	'Form' => Collective\Html\FormFacade::class,
 
 If you would like to use another theme than default you would have to publish the settings and change the theme setting:
 
