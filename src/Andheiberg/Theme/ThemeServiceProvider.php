@@ -1,4 +1,6 @@
-<?php namespace Andheiberg\Theme;
+<?php
+
+namespace Andheiberg\Theme;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -42,7 +44,7 @@ class ThemeServiceProvider extends ServiceProvider {
 		});
 		
 		// Register 'theme' instance container to our Asset object
-		$this->app['theme'] = $this->app->share(function($app)
+		$this->app->singleton('theme', function($app)
 		{
 			return new Theme($app['theme.module']);
 		});

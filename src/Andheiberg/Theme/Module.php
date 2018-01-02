@@ -1,4 +1,6 @@
-<?php namespace Andheiberg\Theme;
+<?php
+
+namespace Andheiberg\Theme;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Config\Repository as Config;

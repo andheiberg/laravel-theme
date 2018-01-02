@@ -1,4 +1,6 @@
-<?php namespace Andheiberg\Theme;
+<?php
+
+namespace Andheiberg\Theme;
 
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Input;
